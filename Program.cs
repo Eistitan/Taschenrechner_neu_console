@@ -3,6 +3,7 @@ float zahl_b;
 float ergebnis;
 string rech;
 bool dau_a, dau_b, dau_r;
+bool runtime = true;
 
 do
 {
@@ -19,12 +20,11 @@ do
         dau_b = float.TryParse(Console.ReadLine(), out zahl_b);
 
     } while (dau_b==false);
-    
 
     do
     {
-        Console.Write("Die Rechenart eingeben, oder mit Exit das Programm beenden: ");
-        rech = Console.ReadLine();
+        Console.Write("Die Rechenart eingeben: ");
+        rech = Console.ReadLine().ToLower();
 
         switch (rech)
         {
@@ -57,13 +57,6 @@ do
                 ergebnis=zahl_a-zahl_b;
                 dau_r = true;
                 break;
-            case "Exit":
-            case "exit":
-                ergebnis = 0;
-                dau_r = true;
-                Thread.Sleep(500);
-                Environment.Exit(0);
-                break;
             default:
                 Console.WriteLine("Unbekannte Rechenart.");
                 ergebnis = 0;
@@ -79,8 +72,20 @@ do
     {
         Console.WriteLine($"Ergebnis = {ergebnis}\n");
     }
-    
-} while (true);
+    Console.Write("Programm beenden? ");
+    string janein =Console.ReadLine().ToLower();
+    Console.WriteLine("");
+    if (janein=="j" || janein == "ja"|| janein =="yes" || janein == "y")
+    {
+        Thread.Sleep(200);
+        runtime=false;
+    }
+    else
+    {
+        runtime = true;
+    }
+
+} while (runtime==true);
 
 
 
